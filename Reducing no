@@ -1,0 +1,62 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int inf=(int)1e9;
+int memo[1000];
+int funct (int n)//reducing number using recursion
+{
+
+    int o1,o2,o3;
+    o1=inf;
+    o2=inf;
+    o3=inf;
+    if (n==1)
+    return 0;
+    if (memo[n]!=-1)
+       return memo[n];
+    if (n%3==0){
+        o1 =1+funct (n/3);}
+     if (n%2==0)
+        o2=1+funct (n/2);
+        o3=1+funct (n-1);
+      memo[n]=min (o2,min(o1,o3));
+      return memo[n];
+//return min (o2,min(o1,o3));
+}
+int funcdp (int n)//reducing number by bottom up approach(1 D)
+{
+    int dp[1000];
+    dp[0]=0;
+    dp[1]=0;
+    dp[2]=1;
+    dp[3]=1;
+    for (int i=4;i<=n;i++)
+    {
+        int o1,o2,o3;
+    o1=inf;
+    o2=inf;
+    o3=inf;
+
+    if (i%3==0){
+        o1 =1+funcdp (i/3);}
+     if (i%2==0)
+        o2=1+funcdp (i/2);
+        o3=1+funcdp (i-1);
+      dp[i]=min (o2,min(o1,o3));
+    }
+      return dp[n];
+
+}
+int main()
+{
+    int n;
+    cin>>n;
+    /*for (int i=0;i<=n;i++)
+    {
+        memo[n]=-1;
+    }*/
+    fill (memo,memo+n+1,-1);
+    int ans= funcdp (n);
+    cout<<ans;
+    return 0;
+}
