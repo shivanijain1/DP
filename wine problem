@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+int counts=0;
+int memo[100][100];
+int profit (int arr[],int strt,int ends,int yr)
+{
+    ++counts;
+    if (strt>ends){
+        return 0;
+    }
+        if (memo[strt][ends]!=-1)
+        return memo [strt][ends];
+        int t1= arr[strt]*yr+profit (arr,strt+1,ends,yr+1);
+        int t2= arr[ends]*yr+profit (arr,strt,ends-1,yr+1);
+        int ans = max(t1,t2);
+        memo[strt][ends]=ans;
+        return  ans;
+}
+int main ()
+{
+    int n;
+    cin>>n;
+    int arr[1000];
+    for (int i=0;i<n;++i)
+    {
+        cin>>arr[i];
+
+    }
+    memset (memo,-1,sizeof (memo));
+
+    int ans =profit (arr,0,n-1,1);
+    cout<<ans<<endl;
+    cout<<counts;
+    return 0;
+}
