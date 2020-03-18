@@ -1,0 +1,23 @@
+//kedane's algo
+//space optimised
+#include <bits/stdc++.h>
+using namespace std;
+int maxSubaraySum (){
+    int n;cin>>n;
+    int arr[n];
+    for (int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int sum=0;
+    int maxTillNow=sum;
+    for (int i=0;i<n;i++){
+        sum+=arr[i];
+        if (sum<0) sum=0;
+        maxTillNow= max (maxTillNow,sum);
+    }   
+        return maxTillNow;
+}
+int main() {
+	cout<<maxSubarraySum();
+	return 0;
+}
