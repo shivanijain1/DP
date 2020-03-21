@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+int longest_subseq(int n,int arr[]){
+    int dp[n]={1};
+    int ans=0;
+        for (int i=1;i<n;i++){
+            for (int j=0;j<i;j++){
+                if (arr[i]>=arr[j]){
+                int curlen=1+dp[j];
+                dp[i]=max (curlen,dp[i]);    
+                }
+            }
+            ans = max(ans,dp[i]);
+        }
+       
+        return ans;
+    }
+int main() {
+
+	int n;cin>>n;
+	int arr[n];
+	for (int i=0;i<n;i++){
+	    cin>>arr[i];
+	}
+	cout<<longest_subseq(n,arr);
+	return 0;
+}
